@@ -1,9 +1,11 @@
 package lotto.view;
 
+import java.util.Collection;
+
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.LottoCount;
 import lotto.domain.result.GameResult;
-import lotto.domain.result.GameResultDto;
 import lotto.domain.result.RankCount;
 import lotto.domain.result.Statistic;
 
@@ -19,14 +21,17 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printResult(GameResultDto gameResult) {
+	public static void printResult(GameResult result) {
 		System.out.println("당첨 통계 \n ==============");
-		printRank(gameResult.getGameResult());
-		printProfit(gameResult.getProfit());
+		printRank(result.getResult());
 	}
 
-	private static void printRank(GameResult gameResult) {
-		for (RankCount rankCount : gameResult.getResult()) {
+	public static void printProfit(double profit) {
+		System.out.println("총 수익률은 " + profit + "% 입니다.");
+	}
+
+	private static void printRank(Collection<RankCount> result) {
+		for (RankCount rankCount : result) {
 			printEachRank(rankCount);
 		}
 	}
@@ -62,9 +67,5 @@ public class OutputView {
 			return true;
 		}
 		return false;
-	}
-
-	private static void printProfit(double profit) {
-		System.out.println("총 수익률은 " + profit + "% 입니다.");
 	}
 }
