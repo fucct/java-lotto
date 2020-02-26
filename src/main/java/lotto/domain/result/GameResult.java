@@ -10,12 +10,11 @@ import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
 
 public class GameResult {
-	public static final int PERCENTAGE = 100;
 
 	private Map<Statistic, RankCount> result = new LinkedHashMap<>();
 
 	public GameResult(WinningLotto winningLotto, Lottos lottos) {
-		for(Statistic statistic : Statistic.values()) {
+		for (Statistic statistic : Statistic.values()) {
 			result.put(statistic, new RankCount(statistic));
 		}
 		for (Lotto lotto : lottos) {
@@ -25,11 +24,11 @@ public class GameResult {
 	}
 
 	public double getEarningMoney(PurchaseMoney money) {
-		double profit = 0;
+		Profit profit = new Profit();
 		for (RankCount rankCount : result.values()) {
-			profit += rankCount.getProfit();
+			profit.add(rankCount.getProfit());
 		}
-		return (profit / money.getPurchaseMoney()) * PERCENTAGE;
+		return profit.calculate(money);
 	}
 
 	public Collection<RankCount> getResult() {

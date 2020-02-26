@@ -35,7 +35,7 @@ class GameResultTest {
 	@DisplayName("정상적인 수익률을 반환하는지")
 	void getProfitTest() {
 		assertThat(
-			new GameResult(winningLotto,lottos).getEarningMoney(money)
+			new GameResult(winningLotto, lottos).getEarningMoney(money)
 		).isEqualTo((3000000 / money.getPurchaseMoney()) * 100);
 	}
 }
